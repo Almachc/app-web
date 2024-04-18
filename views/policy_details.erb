@@ -1,0 +1,20 @@
+<h1>Detalhes da apólice</h1>
+
+<p>Emissão: <b><%= policy['effectiveFrom'] %></b></p>
+<p>Fim da cobertura: <b><%= policy['effectiveUntil'] %></b></p>
+
+<div>
+  <h2>Segurado</h2>
+
+  <p>Nome: <b><%= policy['insured']['name'] %></b></p>
+  <p>Documento: <b><%= policy['insured']['documentNumber'] %></b></p>
+</div>
+
+<div>
+  <h2>Veículo</h2>
+
+  <p>Marca: <b><%= policy['vehicle']['make'] %></b></p>
+  <p>Modelo: <b><%= policy['vehicle']['model'] %></b></p>
+  <p>Placa: <b><%= policy['vehicle']['licensePlate'] %></b></p>
+  <p>Ano: <b><%= policy['vehicle']['year'] %></b></p>
+</div>

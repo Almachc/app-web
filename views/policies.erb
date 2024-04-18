@@ -11,6 +11,7 @@
     <th>Placa</th>
     <th>Emissão</th>
     <th>Fim da cobertura</th>
+    <th></th>
   </tr>
   <% policies.each do |policy| %>
     <tr>
@@ -19,6 +20,7 @@
       <td><%= policy['vehicle']['licensePlate'] %></td>
       <td><%= policy['effectiveFrom'] %></td>
       <td><%= policy['effectiveUntil'] %></td>
+      <td><a href='/policies/<%= policy['id'] %>'>Detalhes</a></td>
     </tr>
   <% end %>
 </table>
