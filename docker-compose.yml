@@ -1,0 +1,8 @@
+services:
+  app:
+    build: .
+    volumes:
+      - .:/app
+    command: rackup
+    ports:
+      - 3000:3000
