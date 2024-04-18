@@ -1,4 +1,5 @@
 require_relative 'base_controller'
+require './models/user'
 
 class AuthController < BaseController
   get '/auth/:provider/callback' do
@@ -6,6 +7,8 @@ class AuthController < BaseController
 
     session[:oauth_id] = auth_hash['uid']
     session[:user_email] = auth_hash['info']['email']
+
+    User.find_or_create_by(email: auth_hash['info']['email'])
 
     redirect to('/')
   end

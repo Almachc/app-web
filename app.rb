@@ -1,9 +1,10 @@
 require 'sinatra'
 require 'faraday'
 require 'dotenv/load'
-require './routes'
 require 'omniauth'
 require 'omniauth-google-oauth2'
+require 'sinatra/activerecord'
+require './routes'
 require './omniauth/strategies/cognito'
 
 class App < Sinatra::Base
@@ -11,6 +12,7 @@ class App < Sinatra::Base
 
   configure do
     set :sessions, true
+    set :database_file, './config/database.yml'
   end
 
   use Rack::Session::Cookie, secret: ENV['SESSION_SECRET'], httponly: true, expire_after: FOUR_HOURS

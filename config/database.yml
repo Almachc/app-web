@@ -1,0 +1,20 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  username: <%= ENV['POSTGRESQL_USER'] || 'postgres' %>
+  password: <%= ENV['POSTGRESQL_PASSWORD'] || 'postgres' %>
+  host: <%= ENV['POSTGRESQL_HOST'] || 'localhost' %>
+  port: <%= ENV['POSTGRESQL_PORT'] || 5432 %>
+  pool: <%= ENV['POSTGRESQL_POOL'] || 5 %>
+
+development:
+  <<: *default
+  database: app_web_development
+
+test:
+  <<: *default
+  database: app_web_test
+
+production:
+  <<: *default
+  database: app_web_production
