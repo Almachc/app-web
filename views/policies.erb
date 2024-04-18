@@ -1,0 +1,24 @@
+<% content_for :head do %>
+  <link rel='stylesheet' href='/css/policies.css'>
+<% end %>
+
+<h1>Apólices</h1>
+
+<table>
+  <tr>
+    <th>ID</th>
+    <th>Nome</th>
+    <th>Placa</th>
+    <th>Emissão</th>
+    <th>Fim da cobertura</th>
+  </tr>
+  <% policies.each do |policy| %>
+    <tr>
+      <td><%= policy['id'] %></td>
+      <td><%= policy['insured']['name'] %></td>
+      <td><%= policy['vehicle']['licensePlate'] %></td>
+      <td><%= policy['effectiveFrom'] %></td>
+      <td><%= policy['effectiveUntil'] %></td>
+    </tr>
+  <% end %>
+</table>
