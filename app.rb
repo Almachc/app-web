@@ -4,6 +4,7 @@ require 'dotenv/load'
 require './routes'
 require 'omniauth'
 require 'omniauth-google-oauth2'
+require './omniauth/strategies/cognito'
 
 class App < Sinatra::Base
   FOUR_HOURS = 14400

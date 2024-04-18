@@ -2,3 +2,8 @@
   <input type='hidden' name='authenticity_token' value="<%= csrf_token %>">
   <button type='submit'>Login com Google</button>
 </form>
+
+<form method='post' action='/auth/cognito-idp'>
+  <input type='hidden' name='authenticity_token' value="<%= csrf_token %>">
+  <button type='submit'>Login com Cognito</button>
+</form>

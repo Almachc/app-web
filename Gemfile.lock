@@ -79,6 +79,7 @@ DEPENDENCIES
   faraday
   omniauth
   omniauth-google-oauth2
+  omniauth-oauth2
   puma
   rackup
   sinatra

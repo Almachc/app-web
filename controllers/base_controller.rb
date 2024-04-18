@@ -8,7 +8,9 @@ class BaseController < Sinatra::Base
   NON_AUTH_PATHS = [
     '/login',
     '/auth/google_oauth2',
-    '/auth/google_oauth2/callback'
+    '/auth/google_oauth2/callback',
+    '/auth/cognito-idp',
+    '/auth/cognito-idp/callback'
   ].freeze
 
   before do
