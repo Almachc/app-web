@@ -13,3 +13,9 @@ gem 'omniauth-oauth2'
 gem 'sinatra-activerecord'
 gem 'pg'
 gem 'rake'
+
+group :test do
+  gem 'rspec'
+  gem 'rack-test'
+  gem 'webmock'
+end
