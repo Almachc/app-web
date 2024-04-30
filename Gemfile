@@ -13,6 +13,7 @@ gem 'omniauth-oauth2'
 gem 'sinatra-activerecord'
 gem 'pg'
 gem 'rake'
+gem 'jwt'
 
 group :test do
   gem 'rspec'

@@ -137,6 +137,7 @@ DEPENDENCIES
   byebug
   dotenv
   faraday
+  jwt
   omniauth
   omniauth-google-oauth2
   omniauth-oauth2
