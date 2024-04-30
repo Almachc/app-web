@@ -1,62 +1,16 @@
 require_relative 'base_controller'
+require './clients/graphql_client'
 
 class PoliciesController < BaseController
   get '/policies' do
-    query = <<-GRAPHQL
-      query GetPolicies {
-        policies {
-          id
-          effectiveFrom
-          effectiveUntil
-          insured {
-            name
-            documentNumber
-          }
-          vehicle {
-            licensePlate
-            make
-            model
-            year
-          }
-        }
-      }
-    GRAPHQL
+    response = GraphqlClient.call('get_policies')
 
-    client = Faraday.new(url: ENV['GRAPHQL_HOST'], headers: { 'Content-Type' => 'application/json' })
-
-    response = client.post do |req|
-      req.body = { query: query }.to_json
-    end
-
-    erb :policies, locals: { policies: JSON.parse(response.body)['data']['policies'] }
+    erb :policies, locals: { policies: response.body['data']['policies'] }
   end
 
   get '/policies/:id' do
-    query = <<-GRAPHQL
-      query GetPolicy($id: ID!) {
-        policy(id: $id) {
-          effectiveFrom
-          effectiveUntil
-          insured {
-            name
-            documentNumber
-          }
-          vehicle {
-            licensePlate
-            make
-            model
-            year
-          }
-        }
-      }
-    GRAPHQL
+    response = GraphqlClient.call('get_policy', { id: params[:id] })
 
-    client = Faraday.new(url: ENV['GRAPHQL_HOST'], headers: { 'Content-Type' => 'application/json' })
-
-    policy = client.post do |req|
-      req.body = { query: query, variables: { id: params[:id] } }.to_json
-    end
-
-    erb :policy_details, locals: { policy: JSON.parse(policy.body)['data']['policy'] }
+    erb :policy_details, locals: { policy: response.body['data']['policy'] }
   end
 end
