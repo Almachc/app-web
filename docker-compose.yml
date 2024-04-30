@@ -9,7 +9,7 @@ services:
     build: .
     volumes:
       - .:/app
-    command: rackup
+    command: bash -c "rake db:setup && rackup"
     ports:
       - 3000:3000
     depends_on:
