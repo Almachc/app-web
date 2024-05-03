@@ -1,0 +1,45 @@
+<% content_for :head do %>
+  <link rel='stylesheet' href='/css/new_policy.css'>
+<% end %>
+
+<h1>Criar apólice</h1>
+
+<form method='post' action='/policies'>
+  <input type='hidden' name='authenticity_token' value='<%= csrf_token %>'>
+
+  <h2 style='padding-top: 25px'>Segurado</h2>
+
+  <div class='form-row'>
+    <label for='insured_name'>Nome:</label>
+    <input type='text' id='insured_name' name='insured_name' required>
+  </div>
+
+  <div class='form-row'>
+    <label for='insured_document'>Documento:</label>
+    <input type='text' id='insured_document' name='insured_document' required>
+  </div>
+
+  <h2 style='padding-top: 25px'>Vehicle</h2>
+
+  <div class='form-row'>
+    <label for='vehicle_license_plate'>Placa:</label>
+    <input type='text' id='license_plate' name='vehicle_license_plate' required>
+  </div>
+
+  <div class='form-row'>
+    <label for='vehicle_make'>Marca:</label>
+    <input type='text' id='vehicle_make' name='vehicle_make' required>
+  </div>
+
+  <div class='form-row'>
+    <label for='vehicle_model'>Modelo:</label>
+    <input type='text' id='vehicle_model' name='vehicle_model' required>
+  </div>
+
+  <div class='form-row'>
+    <label for='year'>Ano:</label>
+    <input type='number' id='vehicle_year' name='vehicle_year' required>
+  </div>
+
+  <button type='submit'>Finalizar</button>
+</form>

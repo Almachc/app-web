@@ -117,3 +117,84 @@ describe 'GET /policies/:id', type: :request do
     expect(last_response.body).to include('2024')
   end
 end
+
+describe 'GET /policies/new', type: :request do
+  before do
+    sign_in
+  end
+
+  it 'renders the policy creation form' do
+    get '/policies/new'
+
+    expect(last_response.status).to eq(200)
+    expect(last_response.body).to include('Criar apólice')
+  end
+end
+
+describe 'POST /policies', type: :request do
+  let(:valid_params) do
+    {
+      'vehicle_license_plate' => 'abc1234',
+      'vehicle_make' => 'chevrolet',
+      'vehicle_model' => 'camaro',
+      'vehicle_year' => '2024',
+      'insured_name' => 'Homer Simpsons',
+      'insured_document' => '123456789'
+    }
+  end
+
+  let(:graphql_input) do
+    {
+      vehicle: {
+        licensePlate: 'abc1234',
+        make: 'chevrolet',
+        model: 'camaro',
+        year: '2024'
+      },
+      insured: {
+        name: 'Homer Simpsons',
+        documentNumber: '123456789'
+      }
+    }
+  end
+
+  context 'when request is successful' do
+    let(:graphql_output) do
+      double(success?: true, body: { 'data' => { 'createPolicy' => { 'message' => 'OK' } } })
+    end
+
+    before do
+      allow(GraphqlClient).to receive(:call).with('create_policy', graphql_input).and_return(graphql_output)
+
+      sign_in
+      post '/policies', valid_params
+    end
+
+    it 'redirects to /policies with a success flash message' do
+      follow_redirect!
+
+      expect(last_request.path_info).to eq('/policies')
+      expect(last_response.body).to include('Apólice criada com sucesso')
+    end
+  end
+
+  context 'when request fails' do
+    let(:graphql_output) do
+      double(success?: true, body: { 'errors' => [{ 'message' => 'Deu ruim' }] })
+    end
+
+    before do
+      allow(GraphqlClient).to receive(:call).with('create_policy', graphql_input).and_return(graphql_output)
+
+      sign_in
+      post '/policies', valid_params
+    end
+
+    it 'redirects to /policies/new with an error flash message' do
+      follow_redirect!
+
+      expect(last_request.path_info).to eq('/policies/new')
+      expect(last_response.body).to include('Deu ruim, se ferrou')
+    end
+  end
+end
