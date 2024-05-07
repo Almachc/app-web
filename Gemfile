@@ -14,6 +14,7 @@ gem 'sinatra-activerecord'
 gem 'pg'
 gem 'rake'
 gem 'jwt'
+gem 'sinatra-flash'
 
 group :test do
   gem 'rspec'

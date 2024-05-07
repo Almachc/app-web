@@ -1,9 +1,12 @@
 require 'sinatra/content_for'
+require 'sinatra/flash'
 
 class BaseController < Sinatra::Base
   helpers Sinatra::ContentFor
 
   set :views, File.expand_path('../../views', __FILE__)
+
+  register Sinatra::Flash
 
   NON_AUTH_PATHS = [
     '/login',
