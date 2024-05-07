@@ -38,7 +38,7 @@ class PoliciesController < BaseController
       flash[:notice] = { type: 'success', message: 'Apólice criada com sucesso' }
       redirect('/policies')
     else
-      flash[:notice] = { type: 'error', message: 'Deu ruim, se ferrou' }
+      flash[:notice] = { type: 'error', message: 'Ops, algo deu errado' }
       redirect('/policies/new')
     end
   end
